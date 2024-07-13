@@ -13,7 +13,7 @@ export function Header({
 }: HeaderProps) {
     const level = _level || 3;
 
-    const commonClassName = "font-bold text-primary"
+    const commonClassName = "font-bold text-secondary"
 
     const content = title;
     return level === 1 ?
