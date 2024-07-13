@@ -25,3 +25,5 @@ export type GetTriviaPayload = {
     response_code: ResponseCode;
     results: Trivia[];
 }
+
+export type LogAnswer = (answerValidation: boolean) => void;

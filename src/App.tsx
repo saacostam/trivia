@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from 'react-query'
 
 import { Container } from "./modules/common"
-import { TriviaWidgetGate } from "./modules/trivia/component"
+import { TriviaPage } from './pages';
 
 const queryClient = new QueryClient();
 
@@ -9,7 +9,7 @@ function App() {
     return (
         <QueryClientProvider client={queryClient}>
             <Container>
-                <TriviaWidgetGate />
+                <TriviaPage />
             </Container>
         </QueryClientProvider>
     )

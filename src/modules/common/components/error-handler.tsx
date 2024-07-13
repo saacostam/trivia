@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { Header } from "./header";
-import { IconX } from "../../icons";
+import { IconArrowPath, IconX } from "../../icons";
 
 type ErrorKeyValuePair = [boolean, Error];
 
@@ -21,11 +21,16 @@ export function ErrorHandler({
             <IconX />
         </div>
         <Header title="Something went wrong!" className="text-error font-bold text-center my-4 text-2xl" level={3} />
-        <p className="text-center text-base-content mb-4">Please try again!</p>
-        <ul className="border rounded border-error p-4 px-8 h-32 list-disc overflow-y-scroll">
+        <ul className="border rounded border-error p-4 px-8 h-32 list-disc overflow-y-scroll mb-8">
             {
                 errorsThatHappened.map(([, error]) => <li className="text-error text-sm">{error.message}</li>)
             }
         </ul>
+        <div className="flex justify-center">
+            <button className="btn btn-outline btn-error mx-auto" onClick={() => window.location.reload()}>
+                <IconArrowPath />
+                Retry
+            </button>
+        </div>
     </section>
 }

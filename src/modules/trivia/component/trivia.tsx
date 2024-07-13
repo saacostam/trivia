@@ -7,7 +7,7 @@ export interface TriviaProps {
     answerQuestion: (id: string, answer: string) => void;
 }
 
-export function Trivia({
+export function SingleTrivia({
     trivia,
     answerQuestion,
 }: TriviaProps) {

@@ -1,27 +1,36 @@
 import { useCallback, useEffect, useState } from "react";
 
 
-import { Trivia as TriviaType } from "../types"
-import { Trivia } from "./trivia";
+import { LogAnswer, Trivia as TriviaType } from "../types"
+import { SingleTrivia } from "./trivia";
 import { buildControlledTrivia } from "../utils";
 
 export interface TriviaWidgetProps {
-    trivias: TriviaType[];
     refetch: () => void;
+    logAnswer: LogAnswer;
+    trivias: TriviaType[];
 }
 
 export function TriviaWidget({
     trivias: raw_trivias,
     refetch,
+    logAnswer,
 }: TriviaWidgetProps) {
     const [trivias, setTrivias] = useState(raw_trivias.map(buildControlledTrivia));
     useEffect(() => setTrivias(raw_trivias.map(buildControlledTrivia)), [raw_trivias]);
 
     const answerQuestion = useCallback((id: string, answer: string) => {
-        setTrivias(trivias => trivias.map(
-            trivia => trivia.id === id ? { ...trivia, selected: answer } : trivia
-        ))
-    }, []);
+        setTrivias(trivias => {
+            const trivia = trivias.find(trivia => trivia.id === id);
+            if (trivia) logAnswer(trivia.correct_answer === answer);
+
+            return trivias.map(
+                trivia => trivia.id === id ? { ...trivia, selected: answer } : trivia
+            );
+        })
+    }, [
+        logAnswer,
+    ]);
 
     useEffect(() => {
         if (!trivias.some(trivia => !trivia.selected)) {
@@ -29,5 +38,5 @@ export function TriviaWidget({
         }
     }, [trivias, refetch]);
 
-    return trivias.map(trivia => <Trivia trivia={trivia} answerQuestion={answerQuestion} key={trivia.id} />)
+    return trivias.map(trivia => <SingleTrivia trivia={trivia} answerQuestion={answerQuestion} key={trivia.id} />)
 }

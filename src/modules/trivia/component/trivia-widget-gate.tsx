@@ -1,17 +1,23 @@
-import { ErrorHandler, Header } from "../../common";
+import { ErrorHandler } from "../../common";
 import { useGetTrivia } from "../fetcher";
+import { LogAnswer } from "../types";
 import { TriviaWidget } from "./trivia-widget";
 import { TriviaWidgetSkeleton } from "./trivia-widget-skeleton";
 
-export function TriviaWidgetGate() {
+export interface TriviaWidgetGateProps {
+    logAnswer: LogAnswer;
+}
+
+export function TriviaWidgetGate({
+    logAnswer,
+}: TriviaWidgetGateProps) {
     const trivia = useGetTrivia();
 
     return <>
-        <Header title="Trivia App" level={1} className='mb-8 text-center' />
         {
             trivia.isLoading || trivia.isFetching ? <TriviaWidgetSkeleton />
                 : trivia.isError ? <ErrorHandler errors={[[trivia.isError, trivia.error]]} />
-                    : trivia.isSuccess ? <TriviaWidget trivias={trivia.data.results} refetch={trivia.refetch} /> : null
+                    : trivia.isSuccess ? <TriviaWidget trivias={trivia.data.results} refetch={trivia.refetch} logAnswer={logAnswer} /> : null
         }
     </>
 }
