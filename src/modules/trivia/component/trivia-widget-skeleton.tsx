@@ -5,5 +5,7 @@ export function TriviaWidgetSkeleton() {
         <div className={commonClassname}></div>
         <div className={commonClassname}></div>
         <div className={commonClassname}></div>
+
+        <div className="skeleton h-8 mb-4 border"></div>
     </>
 }
