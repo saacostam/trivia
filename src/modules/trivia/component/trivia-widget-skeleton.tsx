@@ -1,11 +1,9 @@
 export function TriviaWidgetSkeleton() {
-    const commonClassname = "skeleton h-40 mb-8 border"
+    const commonClassname = "skeleton h-40 mb-8 border animate-pulse"
 
     return <>
         <div className={commonClassname}></div>
         <div className={commonClassname}></div>
         <div className={commonClassname}></div>
-
-        <div className="skeleton h-8 mb-4 border"></div>
     </>
 }

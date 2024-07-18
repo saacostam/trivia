@@ -1,17 +1,15 @@
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { LogAnswer } from "../types";
 
 export function useTriviaStats() {
-    const [_answers, setAnswers] = useState<boolean[]>([]);
+    const [answers, setAnswers] = useState<boolean[]>([]);
 
-    const logAnswer: LogAnswer = useCallback((answerValidation: boolean) => {
+    const logAnswer: LogAnswer = (answerValidation: boolean) => {
         setAnswers(prev => ([
             ...prev,
             answerValidation,
         ]))
-    }, [])
-
-    const answers = useMemo(() => _answers.filter((_, index) => index % 2 === 0), [_answers]);
+    }
 
     const streak = useMemo(() => {
         let inStreak = true;
@@ -27,13 +25,9 @@ export function useTriviaStats() {
         return streak
     }, [answers]);
 
-    return useMemo(() => ({
+    return {
         streak,
         answers,
         logAnswer,
-    }), [
-        streak,
-        answers,
-        logAnswer,
-    ])
+    };
 }
