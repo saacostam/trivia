@@ -18,7 +18,7 @@ This project was built as a fun way to challenge knowledge, track progress, and 
 
 🧠 Play now and test your trivia skills!
 
-### Dev Environment
+# Dev Environment
 
 - Run dev server: `npm run dev`
 - Build: `npm run build`
